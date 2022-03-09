@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/normalize.css">
+    <title>Transaction</title>
+</head>
+
+<body>
+    <div id="app8">
+        <header>
+
+            <nav class="navbar navbar-dark bg-dark">
+
+                <div><a href="cards.html">Mis Tarjetas</a> ></div>
+
+                <a href="inversiones.html">Pagos de Servicios</a>
+
+                <a href="inversiones.html">Inversiones</a>
+
+                <a href="inversiones.html">ayuda</a>
+
+                <a href="created-card.html">Solicitar Mi tarjeta</a>
+
+                <div class="navegacion"> <a href="accounts.html">Voler a mis Cuentas</a></div>
+
+                <button type="submit" @click="logout()"><a href="index.html">CERRAR SESIÓN</a></button>
+
+            </nav>
+
+        </header>
+
+        <main>
+            <section>
+                <div style="width: 70%; height: 70%;">
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="cuenta" id="propia" v-model="numberOrigen" value="numberOrigen" @click="cuentaOrigens()">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                     Tus cuentas
+                    </label>
+
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="cuenta" v-model="numberOrigen" id="terceros" value="numberOrigen" @click="cuentaDestinos()">
+                        <label class="form-check-label " for="flexRadioDefault2 "> cuenta de tercero
+                        </label>
+
+                    </div>
+
+                    <form onsubmit="return false" v-show="cuentaOrigen">
+                        <select class=" form-select " aria-label="Default select example " name="cuenta " v-model="numberOrigen ">
+                            <option>DESDE QUE CUENTA QUIERE HACER LA TRANSFERENCIA</option>
+                            <option v-for="account in accounts " :value=account.number>CUENTA N°:{{account.number}}  ESTADO:${{account.balance}}</option>
+                      </select>
+                        <h3>Elija la cuenta a Transferir</h3>
+
+                        <select class="form-select " aria-label="Default select example " name="cuentaDestino " v-model="numberDestino ">
+                            <option>selecione la cuenta donde desea recibir la transferencia</option>
+                        <option v-for="account in accounts " :value=account.number> CUENTA N°:{{account.number}}  ESTADO:${{account.balance}}</option>
+                        </select>
+
+                        <div class="form-trans ">
+                            <label for="monto ">monto a transferir</label>
+                            <input type="number " id="monto " v-model="amount ">
+                        </div>
+                        <div class="form-trans ">
+                            <label for=" ">descripción</label>
+                            <input type="text " id="descripción " v-model="description ">
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                TRANSFERIR
+               </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">TRANSFERENCIA EN PROCESO</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        SEGURO QUE QUIERE HACER ESTA TRANSFERENCIA?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                                        <button type="button" class="btn btn-primary" @click="newtrans()">SI ESTOY SEGURO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                    <form onsubmit="return false " v-show="cuentaDestino">
+
+                        <h3>Seleccione su cuenta</h3>
+                        <select class="form-select " aria-label="Default select example " name="cuenta " v-model="numberOrigen ">
+                            <option selected>seleccione una cuenta</option>
+                            <option v-for="account in accounts " :value=account.number>CUENTA N°:{{account.number}}  ESTADO:${{account.balance}}</option>
+                      </select>
+                        <h4>numero de cuenta del tercero</h4>
+                        <div class="form-trans ">
+                            <label for="cuentaDestino ">ingrese el número de Cuenta a transferir</label>
+                            <input type="text" id="numberDestiny " v-model="numberDestino ">
+                        </div>
+                        <div class="form-trans ">
+                            <label for="monto ">monto a transferir</label>
+                            <input type="number " id="monto " v-model="amount ">
+                        </div>
+                        <div class="form-trans ">
+                            <label for=" ">descripción</label>
+                            <input type="text " id="descripción " v-model="description ">
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                           TRANSFERIR
+                          </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">TRANSFERENCIA EN PROCESO</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        SEGURO QUE QUIERE HACER ESTA TRANSFERENCIA?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                                        <button type="button" class="btn btn-primary" @click="newtrans()">SI ESTOY SEGURO</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p " crossorigin="anonymous "></script>
+    <script src="./script/transaction.js "></script>
+
+
+    <footer>
+        <h2> mindhub baking @reserved </h2>
+        <img src="imagenes/924920.png " alt="bank " width="150px " height="150px ">
+        <div class="col-lg-2 col-md-6 ">
+            <h5 class="text-white mb-3 p-foot ">Redes Sociales</h5>
+            <ul class="list-unstyled text-muted ">
+                <li><img src="https://img.icons8.com/fluency/144/000000/facebook-circled.png " width="50px " height="50px "><a href="https://es-la.facebook.com/login/device-based/regular/login/ " target="_blank ">  Facebook</a></li>
+                <li><img src="https://img.icons8.com/officel/40/000000/instagram-new.png " width="50px " height="50px "><a href="https://www.instagram.com/?hl=es-la " target="_blank ">   Instagram</a></li>
+                <li><img src="https://img.icons8.com/officel/40/000000/twitter-circled.png " width="50px " height="50px "><a href="https://www.twitter.com/ " target="_blank ">  Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>
