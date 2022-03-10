@@ -92,7 +92,7 @@
                                 <a class="acceder" v-bind:href="`account.html?id=${account.id}`">Acceder</a>
                             </td>
                             <td>
-                                <button type="button" @click="deleteAccount(account.id)" v-cloak>eliminar Cuenta</button>
+                                <button type="button" v-show="account.balance==0" @click="deleteAccount(account.id)" v-cloak>eliminar Cuenta</button>
                             </td>
                         </tr>
                     </tbody>
