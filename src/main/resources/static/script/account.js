@@ -12,7 +12,7 @@ var app3 = new Vue({
             const urlParams = new URLSearchParams(window.location.search);
             const Id = urlParams.get('id');
 
-            axios.get(`http://localhost:8080/api/accounts/${Id}`)
+            axios.get(`/api/accounts/${Id}`)
                 .then(response => {
                     this.account = response.data;
                     console.log(response.data);

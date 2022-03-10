@@ -12,7 +12,7 @@ var app4 = new Vue({
 
     methods: {
         loadData() {
-            axios.get("http://localhost:8080/api/clients/current")
+            axios.get("/api/clients/current")
                 .then(response => {
                     this.client = response.data;
 
