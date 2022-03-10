@@ -44,7 +44,7 @@
 
                     <a href="loan-application.html">Solicitar un Prestamo</a>
 
-                    <a href="payment_posnet.html">Posnet</a>
+                    <a href="#">Posnet</a>
 
                     <button type="submit" @click="logout()"><a href="index.html">CERRAR SESIÓN</a></button>
 
@@ -52,7 +52,7 @@
 
             </header>
 
-            <div class="button1" v-if="account.length < 3">
+            <div class="button1" v-if="accountsTrue.length < 3">
                 <div>
                     <template>
                     <h5>seleccione por favor el tipo de cuenta a crear</h5>
@@ -81,18 +81,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="accounts in account">
-                            <td><img src="./imagenes/858151.png" alt="Tarjetas" width="25px" height="25px"></td>
-                            <td>{{accounts.balance}}</td>
-                            <td>{{accounts.creationDate}}</td>
-                            <td>{{accounts.number}}</td>
-                            <td>{{accounts.typeAccounts}}</td>
+                        <tr v-for="account in accountsTrue">
+                            <td><img src="./imagenes/1000_F_437528341_OsZxIChMRKpVSLmyiLpwmUPFja1gALEP.jpg" alt="Tarjetas" width="30px" height="30px"></td>
+                            <td>{{account.balance}}</td>
+                            <td>{{account.creationDate}}</td>
+                            <td>{{account.number}}</td>
+                            <td>{{account.typeAccounts}}</td>
 
                             <td>
                                 <a class="acceder" v-bind:href="`account.html?id=${account.id}`">Acceder</a>
                             </td>
                             <td>
-                                <button type="button" v-show="accounts.balance == 0" @click=" deleteAccount(accounts.id) " v-cloak>eliminar Cuenta</button></td>
+                                <button type="button" @click="deleteAccount(account.id)" v-cloak>eliminar Cuenta</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -112,7 +113,7 @@
             </thead>
             <tbody>
                 <tr v-for="prestamo in client.loans ">
-                        <td><img src="imagenes/1019709.png " alt="Tarjetas " width="25px " height="25px "></td>
+                        <td><img src="imagenes/2462073.png" alt="Tarjetas " width="25px " height="25px " style="background-color: aliceblue;"></td>
                         <td>{{prestamo.name}}</td>
                         <td>{{prestamo.amount}}</td>
                          <td>{{prestamo.payments}}</td>

@@ -46,26 +46,10 @@
                     <fieldset>
                         <h3>Tipo de Prestamo</h3>
 
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="TipoDePrestamo" id="HIPOTECARIO" v-model="cargarLoans" value="hipotecario" @change="cargarCuota()">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                            HIPOTECARIO
-                            </label>
-                        </div>
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="TipoDePrestamo" id="PERSONAL" v-model="cargarLoans" value="personal" @change="cargarCuota()">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                              PERSONAL
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="TipoDePrestamo" id="AUTOMOTRIZ" v-model="cargarLoans" value="automotriz" @change="cargarCuota()">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                              AUTOMOTRIZ
-                            </label>
+                        <div>
+                            <select name="prestamo" id="prestamo" v-model="cargarLoans" @change="cargarCuota()">
+                               <option v-for="loan in loans" >{{loan.name}}</option>
+                           </select>
                         </div>
 
                         <fieldset>
@@ -91,18 +75,14 @@
                         <div>
                             <h4>Cuenta a depositar el Prestamo</h4>
                             <select name="cuotas" id="" style="margin-bottom: 20px" v-model="numberAccount">cuentas
-                            <option v-for="account in destinyAccount" >{{account.number}}</option>
+                            <option v-for="account in accountsTrue">{{account.number}}</option>
                              </select>
                         </div>
 
                     </fieldset>
 
                     <h5>
-                        <span style="color: white;">Su monto total es de$:{{getMaxAmount}} {{getInterest}}%  </span>
-                        <div>
-
-                            <span style="color: white;">total:</span>
-                        </div>
+                        <span style="color: white;">Su monto total es de$: </span>
                     </h5>
 
 

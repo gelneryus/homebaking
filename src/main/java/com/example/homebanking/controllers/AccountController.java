@@ -31,13 +31,20 @@ public class AccountController {
         return accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
     }
 
-    ;
 
     @RequestMapping("/accounts/{id}")
     public AccountDTO getaccountDTO(@PathVariable Long id) {
         AccountDTO accountId = new AccountDTO(accountRepository.findById(id).orElse(null));
         return accountId;
     }
+        @GetMapping("clients/current/accounts/true")
+        public List<AccountDTO> getAccountDtoTrue(){
+        List<AccountDTO> accountDTOList= accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
+        List<AccountDTO> accountDTOListTrue=accountDTOList.stream().filter(AccountDTO::isActive).collect(Collectors.toList());
+        return  accountDTOListTrue;
+
+        }
+
 
     int min = 00000000;
     int max = 99999999;
@@ -56,8 +63,10 @@ public class AccountController {
     public ResponseEntity<Object> registerAccount(Authentication authentication, @RequestParam String typeAccounts) {
         TypeAccounts typeAccounts1 = TypeAccounts.valueOf(typeAccounts);
         Client client = clientRepository.findByEmail(authentication.getName());
+        List<AccountDTO> accountDTOList= accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
+        List<AccountDTO> accountDTOListTrue=accountDTOList.stream().filter(AccountDTO::isActive).collect(Collectors.toList());
 
-        if (client.getAccount().size() >= 3) {
+        if (accountDTOListTrue.size() >= 3) {
             return new ResponseEntity<>("No puede crear mas cuentas", HttpStatus.FORBIDDEN);
         }
 

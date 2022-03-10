@@ -1,7 +1,6 @@
 var app9 = new Vue({
     el: "#app9",
     data: {
-
         amount: "",
         numberAccount: "",
         payment: "",
@@ -11,16 +10,15 @@ var app9 = new Vue({
         payments: [],
         loans: [],
         cargarLoans: "",
-        cargarCuotas: "",
         cargarAccounts: "",
         interesTotal: 0,
-        prestamoASolicitar: "",
-
+        loan: [],
+        accountsTrue: [],
     },
 
     created() {
         this.cargarAccount()
-
+        this.cargarCuota()
     },
 
     methods: {
@@ -31,7 +29,8 @@ var app9 = new Vue({
                     this.payments = this.loans.filter(loan => loan.name == this.cargarLoans)
                     this.payments = this.payments[0].payments
                     console.log(this.payments)
-                        // this.payments = response.data[0].payments
+
+                    // this.payments = response.data[0].payments
                 })
                 .catch(error => {
                     "error"
@@ -42,8 +41,9 @@ var app9 = new Vue({
             axios.get("/api/clients/current")
                 .then(response => {
                     this.destinyAccount = response.data.account
-
+                    this.accountsTrue = this.destinyAccount.filter(account => account.active == true)
                     console.log(this.destinyAccount)
+                    console.log(this.accountsTrue)
                 })
                 .catch(error => {
                     "error"
@@ -65,9 +65,7 @@ var app9 = new Vue({
                     "error"
                 });
 
-
         },
-
 
         /*     total() {
                 let total = parseFloat(this.application.amount * (0.20)) + parseFloat(this.application.amount)
@@ -78,13 +76,13 @@ var app9 = new Vue({
     computed: {
         getMaxAmount: function() {
             if (this.prestamoASolicitar != "") {
-                loan = this.loans.filter(loan => loan.name == this.prestamoASolicitar);
+                loan = this.loans.filter(loan => loan.name == this.cargarLoans);
                 return loan[0].maxAmount;
             }
         },
         getInterest: function() {
             if (this.prestamoASolicitar != "") {
-                loan = this.loans.filter(loan => loan.name == this.prestamoASolicitar);
+                loan = this.loans.filter(loan => loan.name == this.cargarLoans);
                 return loan[0].interes;
             }
         }

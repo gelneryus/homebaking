@@ -1,33 +1,39 @@
 var app2 = new Vue({
     el: '#app2',
     data: {
-        account: [],
+        accounts: [],
         client: [],
         loans: [],
         accType: "",
-
+        accountsTrue: [],
     },
+
     created() {
         const urlParams = new URLSearchParams(window.location.search);
         var myParam = urlParams.get("id");
+        this.crearDato()
 
-        axios.get("http://localhost:8080/api/clients/current")
-            .then(response => {
-                this.client = response.data;
-
-                this.account = this.client.account;
-
-                this.loans = this.client.loans
-
-                console.log(this.account)
-
-                console.log(this.client)
-            })
-            .catch(e => {
-                console.log("error get")
-            })
     },
     methods: {
+        crearDato() {
+            axios.get("http://localhost:8080/api/clients/current")
+                .then(response => {
+                    this.client = response.data;
+
+                    this.accounts = this.client.account;
+                    this.accountsTrue = this.accounts.filter(account => account.active == true)
+
+                    this.loans = this.client.loans
+
+                    console.log(this.accounts)
+
+                    console.log(this.client)
+                })
+                .catch(e => {
+                    console.log("error get")
+                })
+        },
+
         logout() {
             axios.post(`/api/logout`)
 
