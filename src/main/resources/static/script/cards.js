@@ -32,6 +32,7 @@ var app4 = new Vue({
             console.log("asdas")
             axios.post("/api/clients/current/cards ", "cardType=" + this.checkType + "&cardColor=" + this.checkColor, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
                 .then(response => {
+                    window.alert("La tarjeta se a creado con exito")
                     console.log("CREADO")
                     window.location.href = "/cards.html"
                 })

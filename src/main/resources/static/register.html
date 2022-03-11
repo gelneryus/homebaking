@@ -69,6 +69,14 @@
 						</span>
                         </div>
 
+                        <div>
+                            <h3>seleccione el tipo de cuenta con la que desee crear </h3>
+                            <select name="tipDeCuenta" v-model="form.typeAccounts">
+                                <option  value="AHORRO" >caja de ahorro</option>
+                                <option value="CORRIENTE"> cuenta corrriente</option>
+                            </select>
+                        </div>
+
                         <div class="wrap-input100 validate-input" data-validate="Password is required">
                             <h3>Password</h3>
                             <input class="input100" type="password" name="pass" v-model="form.password">

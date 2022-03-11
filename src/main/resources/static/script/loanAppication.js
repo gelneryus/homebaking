@@ -58,6 +58,7 @@ var app9 = new Vue({
                     "numberAccount": this.numberAccount
                 })
                 .then(response => {
+                    window.alert("PRESTAMO OTORGADO!!!!")
                     console.log("Prestamo creado")
                         // return (window.location.href = "/accounts.html");
                 })

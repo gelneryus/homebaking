@@ -5,7 +5,8 @@ var register = new Vue({
             firstName: "",
             lastName: "",
             email: "",
-            password: ""
+            password: "",
+            typeAccounts: ""
         }
     },
 
@@ -16,14 +17,15 @@ var register = new Vue({
                     firstName: this.form.firstName,
                     lastName: this.form.lastName,
                     email: this.form.email,
-                    password: this.form.password
+                    password: this.form.password,
+                    typeAccounts: this.form.typeAccounts
                 }
                 this.postClient(client)
             }
         },
 
         postClient(client) {
-            axios.post('/api/clients', "firstName=" + client.firstName + "&lastName=" + client.lastName + "&email=" + client.email + "&password=" + client.password, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+            axios.post('/api/clients', "firstName=" + client.firstName + "&lastName=" + client.lastName + "&email=" + client.email + "&password=" + client.password + "&typeAccounts=" + client.typeAccounts, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
                 .then(response => {
                     window.alert("SE REGISTRO CON EXITO!")
                     console.log('registered')

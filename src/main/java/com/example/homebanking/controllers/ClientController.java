@@ -49,7 +49,7 @@ public class ClientController {
                                            @RequestParam String email, @RequestParam String password ,@RequestParam String typeAccounts) {
 
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() ) {
 
             return new ResponseEntity<>("Rellene por favor los espacios vacios", HttpStatus.FORBIDDEN);
 
@@ -84,4 +84,4 @@ public class ClientController {
         return String.valueOf(randomNumber);
     }
 
-    }
+}

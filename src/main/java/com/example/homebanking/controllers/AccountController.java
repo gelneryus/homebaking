@@ -63,10 +63,11 @@ public class AccountController {
     public ResponseEntity<Object> registerAccount(Authentication authentication, @RequestParam String typeAccounts) {
         TypeAccounts typeAccounts1 = TypeAccounts.valueOf(typeAccounts);
         Client client = clientRepository.findByEmail(authentication.getName());
+
         List<AccountDTO> accountDTOList= accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
         List<AccountDTO> accountDTOListTrue=accountDTOList.stream().filter(AccountDTO::isActive).collect(Collectors.toList());
 
-        if (accountDTOListTrue.size() >= 3) {
+        if (accountDTOListTrue.size() <3) {
             return new ResponseEntity<>("No puede crear mas cuentas", HttpStatus.FORBIDDEN);
         }
 
@@ -95,7 +96,7 @@ public class AccountController {
 
             return new ResponseEntity<>("Cuenta borrada", HttpStatus.CREATED);
     }
-    @PatchMapping("/clients/current/accounts/change/{id}")
+   @PatchMapping("/clients/current/accounts/change/{id}")
     public ResponseEntity<Object>cambio(@PathVariable Long id){
         Account account1 = accountRepository.findById(id).orElse(null);
 
@@ -109,6 +110,7 @@ public class AccountController {
 
         return new ResponseEntity<>("Estado de la cuenta modificada", HttpStatus.CREATED);
     }
+
 
 }
 

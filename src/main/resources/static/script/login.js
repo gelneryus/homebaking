@@ -15,6 +15,7 @@ var app6 = new Vue({
             })
 
             .then(response => {
+                window.alert("USTED INGRESO A SU HOME BANKING")
                 console.log('signed in!!!');
                 return window.location.href = "/accounts.html"
 

@@ -34,6 +34,7 @@ var app8 = new Vue({
                     headers: { 'content-type': 'application/x-www-form-urlencoded' }
                 })
                 .then(response => {
+                    window.alert("TRANSACCION HECHA CON EXITO!!!")
                     console.log("CREADO")
                     location.reload
                 })

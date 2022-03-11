@@ -49,21 +49,7 @@ var app2 = new Vue({
                     location.reload()
                 })
         },
-        crearPrestamo() {
-            axios.post("/api/loans", {
-                    "loanTypeId": this.cargarLoans,
-                    "amount": this.amount,
-                    "payments": this.payments[0],
-                    "numberAccount": this.numberAccount
-                })
-                .then(response => {
-                    console.log("Prestamo creado")
-                        // return (window.location.href = "/accounts.html");
-                })
-                .catch(error => {
-                    "error"
-                });
-        },
+
         deleteAccount(id) {
             axios.patch(`/api/clients/current/accounts/delete/` + id)
                 .then(response => {
