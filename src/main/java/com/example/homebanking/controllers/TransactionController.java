@@ -64,9 +64,11 @@ public class TransactionController {
         if (accountDestiny==null){
             return new ResponseEntity<>("cuenta de destino no existe",HttpStatus.FORBIDDEN);
     }
-if (accountOrigin.getBalance()<amount){
+if (accountOrigin.getBalance()< amount || amount <= 0){
     return new ResponseEntity<>("No tiene balance suficiente para hacer la transaccion",HttpStatus.FORBIDDEN);
     }
+
+
 
 Transactions transactionsOrigin=new Transactions(CREDITO,amount,accountOrigin.getNumber()+""+description, LocalDateTime.now(),accountOrigin);
 Transactions transactionsDestiny=new Transactions(DEBITO,amount,accountDestiny.getNumber()+""+description,LocalDateTime.now(),accountDestiny);

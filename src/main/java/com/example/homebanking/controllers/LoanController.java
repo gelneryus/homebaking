@@ -73,8 +73,8 @@ public class LoanController {
                 return new ResponseEntity<>("NO SE PUDO VERIFICAR EL PRESTAMO",HttpStatus.FORBIDDEN);
             }
 
-            if (loanApplicationDTO.getAmount()>loan.getMaxAmount()){
-                    return new ResponseEntity<>("NO SE PUDO VERIFICAR EL PRESTAMO MAXIMO",HttpStatus.FORBIDDEN);
+            if (loanApplicationDTO.getAmount()>loan.getMaxAmount() || loanApplicationDTO.getAmount() <=0){
+                    return new ResponseEntity<>("EXCEDE EN EL MONTO MAXIMO DISPONIBLE O EL MONTO ES NEGATIVO ",HttpStatus.FORBIDDEN);
                         }
 
             if (!loan.getPayments().contains(loanApplicationDTO.getPayments())){

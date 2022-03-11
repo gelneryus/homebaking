@@ -43,8 +43,10 @@ public class PaymentController {
 
         Client client = clientRepository.findByEmail(authentication.getName());
         Card card = cardRepository.findByNumber(paymentsDTO.getNumber());
+
         List<Account> accountList = client.getAccount().stream().collect(Collectors.toList());
         List<Account> accountBalance = accountList.stream().filter(account -> account.getBalance() > paymentsDTO.getAmount()).collect(Collectors.toList());
+
         Account account = accountBalance.stream().findFirst().orElse(null);
 
         //Account account = accountRepository.findById(card.getAccount().getId()).orElse(null);
