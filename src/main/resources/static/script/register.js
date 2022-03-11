@@ -24,10 +24,18 @@ var register = new Vue({
 
         postClient(client) {
             axios.post('/api/clients', "firstName=" + client.firstName + "&lastName=" + client.lastName + "&email=" + client.email + "&password=" + client.password, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
-                .then(response => console.log('registered'))
-                .catch(error => {
-                    "error a la creacion de cliente"
-                });
+                .then(response => {
+                    window.alert("SE REGISTRO CON EXITO!")
+                    console.log('registered')
+
+                    return window.location.href = "/index.html"
+
+                })
+
+
+            .catch(error => {
+                "error a la creacion de cliente"
+            });
         }
 
     }
