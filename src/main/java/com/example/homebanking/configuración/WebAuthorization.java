@@ -92,7 +92,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
         }
 
     }
-    }
+}
 
 
 

@@ -36,10 +36,12 @@ var app8 = new Vue({
                 .then(response => {
                     window.alert("TRANSACCION HECHA CON EXITO!!!")
                     console.log("CREADO")
-                    location.reload
+                        //  location.reload
+
                 })
                 .catch(error => {
-                    "error"
+                    console.log(error)
+                    window.alert("NO SE PUDO HACER LA TRANSACCION")
                 });
         },
         cuentaOrigens() {

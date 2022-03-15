@@ -1,6 +1,7 @@
 package com.example.homebanking.controllers;
 
 
+import com.example.homebanking.DTOS.AccountDTO;
 import com.example.homebanking.DTOS.CardDTO;
 
 import com.example.homebanking.models.Card;
@@ -42,6 +43,14 @@ public class CardController {
         return cardId;
     }
 
+    @GetMapping("clients/current/cards/true")
+    public List<CardDTO> getCardsTrue(){
+        List<CardDTO> CardDTOList= cardRepository.findAll().stream().map(CardDTO::new).collect(Collectors.toList());
+        List<CardDTO> CardDTOListTrue=CardDTOList.stream().filter(CardDTO::getEsActiva).collect(Collectors.toList());
+        return  CardDTOListTrue;
+
+    }
+
     int min2 = 0001;
     int max2 = 9999;
 
@@ -75,6 +84,8 @@ public class CardController {
                                              @RequestParam TransactionsType cardType, @RequestParam CardColor cardColor) {
 
         Client clientCurrent1 = clientRepository.findByEmail(authentication.getName());
+        List<CardDTO> CardDTOList= cardRepository.findAll().stream().map(CardDTO::new).collect(Collectors.toList());
+        List<CardDTO> CardDTOListTrue=CardDTOList.stream().filter(CardDTO::getEsActiva).collect(Collectors.toList());
 
         List<Card> listCard = clientCurrent1.getCard().stream().filter(card -> {
             return card.getType() == cardType;
@@ -94,12 +105,15 @@ public class CardController {
         return new ResponseEntity<>("has creado una tarjeta con exito", HttpStatus.CREATED);
     }
 
-    //Metodo para borrar una tarjeta, que en realidad cambia una variable boolean que dice si está activa o no, para que aparezca comno si estuviera borrada pero sigue estando en la BD
+
     @PatchMapping("/clients/current/cards/delete/{id}")
     public ResponseEntity<Object> smartDelete(@PathVariable Long id){
         Card card = cardRepository.findById(id).orElse(null);
+
+
         card.setEsActiva(false);
         cardRepository.save(card);
+
         return new ResponseEntity<>("Set Good: false", HttpStatus.CREATED);
     }
 

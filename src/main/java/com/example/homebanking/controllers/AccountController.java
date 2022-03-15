@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -28,12 +29,12 @@ public class AccountController {
 
     @RequestMapping("/accounts")
     public List<AccountDTO> getaccountDTO() {
-        return accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
+        return accountRepository.findAll().stream().map(account -> new AccountDTO(account)).collect(Collectors.toList());
     }
 
 
     @RequestMapping("/accounts/{id}")
-    public AccountDTO getaccountDTO(@PathVariable Long id) {
+    public AccountDTO accountDTO(@PathVariable Long id) {
         AccountDTO accountId = new AccountDTO(accountRepository.findById(id).orElse(null));
         return accountId;
     }
@@ -44,7 +45,6 @@ public class AccountController {
         return  accountDTOListTrue;
 
         }
-
 
     int min = 00000000;
     int max = 99999999;
@@ -67,7 +67,7 @@ public class AccountController {
         List<AccountDTO> accountDTOList= accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
         List<AccountDTO> accountDTOListTrue=accountDTOList.stream().filter(AccountDTO::isActive).collect(Collectors.toList());
 
-        if (accountDTOListTrue.size() <3) {
+        if (accountDTOListTrue.size() >=3) {
             return new ResponseEntity<>("No puede crear mas cuentas", HttpStatus.FORBIDDEN);
         }
 
@@ -96,6 +96,7 @@ public class AccountController {
 
             return new ResponseEntity<>("Cuenta borrada", HttpStatus.CREATED);
     }
+
    @PatchMapping("/clients/current/accounts/change/{id}")
     public ResponseEntity<Object>cambio(@PathVariable Long id){
         Account account1 = accountRepository.findById(id).orElse(null);

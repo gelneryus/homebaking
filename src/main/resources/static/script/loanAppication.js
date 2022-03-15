@@ -63,7 +63,7 @@ var app9 = new Vue({
                         // return (window.location.href = "/accounts.html");
                 })
                 .catch(error => {
-                    "error"
+                    window.alert("NO SE PUDO OTORGAR EL PRESTAMO!!")
                 });
 
         },

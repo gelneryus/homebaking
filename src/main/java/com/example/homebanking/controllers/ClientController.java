@@ -7,6 +7,7 @@ import com.example.homebanking.models.Client;
 import com.example.homebanking.models.TypeAccounts;
 import com.example.homebanking.repositories.AccountRepository;
 import com.example.homebanking.repositories.ClientRepository;
+import com.example.homebanking.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,8 @@ public class ClientController {
 
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    EmailService emailService;
 
     @RequestMapping("/clients")
     public List<ClientDTO> getClientDTO() {
@@ -67,6 +70,8 @@ public class ClientController {
 
         Account account= new Account("VIN"+number, LocalDateTime.now(),0,typeAccounts1,client,true);
         accountRepository.save(account);
+
+         emailService.sendSimpleEmailTo(email,"BIENVENIDO AL HOMEBANCKING","REGISTRO CON EXITO");
 
         return new ResponseEntity<> ("Se ha registrado con exito",HttpStatus.CREATED);
     }

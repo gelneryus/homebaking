@@ -14,7 +14,7 @@ public class CardDTO {
     private Integer cvv;
     private LocalDateTime fromDate;
     private LocalDateTime truDate;
-    private Boolean esActiva;
+    private Boolean esActiva=true;
 
 
     public CardDTO() {
@@ -34,7 +34,7 @@ public class CardDTO {
         this.esActiva =card.getEsActiva();
     }
 
-    public Boolean getEsActiva() {
+    public boolean getEsActiva() {
         return esActiva;
     }
 
@@ -103,4 +103,6 @@ public class CardDTO {
     public void setTruDate(LocalDateTime truDate) {
         this.truDate = truDate;
     }
+
+
 }

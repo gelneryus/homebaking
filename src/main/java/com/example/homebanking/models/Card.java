@@ -28,7 +28,7 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardHolder, TransactionsType type, CardColor cardColor, String number, int cvv, LocalDateTime fromDate, LocalDateTime truDate, Client client,boolean activa) {
+    public Card(String cardHolder, TransactionsType type, CardColor cardColor, String number, int cvv, LocalDateTime fromDate, LocalDateTime truDate, Client client,boolean esActiva) {
         this.cardHolder = cardHolder;
         this.type = type;
         this.cardColor = cardColor;
@@ -37,9 +37,8 @@ public class Card {
         this.fromDate = fromDate;
         this.truDate = truDate;
         this.client = client;
-        this.esActiva=activa;
+        this.esActiva=esActiva;
     }
-
 
     public Boolean getEsActiva() {
         return esActiva;

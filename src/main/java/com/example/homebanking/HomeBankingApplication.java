@@ -3,11 +3,14 @@ package com.example.homebanking;
 
 import com.example.homebanking.models.*;
 import com.example.homebanking.repositories.*;
+import com.example.homebanking.service.implementation.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
@@ -24,9 +27,22 @@ public class HomeBankingApplication {
 @Autowired
 	PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private EmailSenderService senderService;
+
+	@EventListener(ApplicationReadyEvent.class)
+	public void triggerMail(){
+
+		/*senderService.sendSimpleEmailTo("gelneryus20@gmail.com",
+				"usted ha sido registrado con éxito y el mail del usuario",
+				"HOME BANKING"); */
+	}
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(HomeBankingApplication.class, args);
 	}
+
 	@Bean
 	public CommandLineRunner initData(ClientRepository repository,
 									  AccountRepository accountRepository,

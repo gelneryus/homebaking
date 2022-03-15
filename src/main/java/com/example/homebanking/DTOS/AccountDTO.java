@@ -21,9 +21,6 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
-
-
-
     public AccountDTO(Account account) {
         this.id = account.getId();
         this.number = account.getNumber();
@@ -32,8 +29,6 @@ public class AccountDTO {
         this.transaction= account.getTransactions().stream().map(TransactionDTO::new).collect(Collectors.toSet());
         this.active = account.isActive();
         this.typeAccounts = account.getTypeAccounts();
-
-
     }
 
     public boolean isActive() {

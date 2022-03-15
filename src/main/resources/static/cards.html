@@ -50,8 +50,9 @@
 
 
         <div class="div1">
-            <button type="button">Eliminar tarjeta</button>
-            <div v-for="card in cards">
+
+            <div v-for="card in cardsTrue">
+
                 <div v-if="card.type== 'DEBITO'">
                     <h1 class="title ">DEBITO <img src="imagenes/5255074.png" width="30px" height="30px" alt="flecha"></h1>
                     <div class="card ">
@@ -84,10 +85,10 @@
                     </div>
                 </div>
 
-            </div>
-            <button type="button">Eliminar tarjeta</button>
 
-            <div v-for="card in cards">
+
+
+
                 <div v-if="card.type== 'CREDITO'">
                     <h1 class="title ">CREDITO <img src="imagenes/5255074.png" width="30px" height="30px" alt="flecha"></h1>
                     <div class="card ">
@@ -122,6 +123,7 @@
                         </div>
                     </div>
                 </div>
+                <button type="button" @click="deleteCards(card.id)" v-cloak>eliminar tarjeta</button>
             </div>
 
         </div>
